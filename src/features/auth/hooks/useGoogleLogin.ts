@@ -6,11 +6,14 @@ export const useGoogleLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const login = async (idToken?: string, accessToken?: string) => {
+  const login = async () => {
     try {
       setIsLoading(true);
       setError(null);
-      await loginWithGoogle(idToken, accessToken);
+      
+      // Native Google Signin will handle the OAuth flow
+      // The auth context will receive the token from GoogleAuthProvider
+      await loginWithGoogle();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Google login failed');
       throw err;

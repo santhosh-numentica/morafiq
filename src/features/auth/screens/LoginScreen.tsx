@@ -4,11 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useLogin } from '@features/auth/hooks';
 import { useGoogleLogin } from '@features/auth/hooks/useGoogleLogin';
-import { useAppleLogin } from '@features/auth/hooks/useAppleLogin';
-import { usePasskeyLogin } from '@features/auth/hooks/usePasskeyLogin';
 import { OTPForm } from '@features/auth/components/OTPForm';
 import { MorafiqLogo } from '@shared/components';
-import { GoogleLogo, AppleLogo } from '@shared/components';
+import { GoogleLogo } from '@shared/components';
 import { Button } from '@shared/components';
 import { useToast } from '@shared/hooks/useToast';
 import { Toast } from '@shared/components/Toast';
@@ -18,8 +16,6 @@ export const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
   const { login, isLoading: isEmailLoading, error: loginError } = useLogin();
   const { login: googleLogin, isLoading: isGoogleLoading } = useGoogleLogin();
-  const { login: appleLogin, isLoading: isAppleLoading } = useAppleLogin();
-  const { login: passkeyLogin, isLoading: isPasskeyLoading } = usePasskeyLogin();
   const { showToast } = useToast();
   const [showOTP, setShowOTP] = useState(false);
   const [email, setEmail] = useState('');
@@ -57,29 +53,13 @@ export const LoginScreen: React.FC = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      await googleLogin('placeholder-id-token', 'placeholder-access-token');
+      await googleLogin();
     } catch (error) {
       console.error('Google login failed:', error);
     }
   };
 
-  const handleAppleLogin = async () => {
-    try {
-      await appleLogin('placeholder-identity-token', 'placeholder-authorization-code');
-    } catch (error) {
-      console.error('Apple login failed:', error);
-    }
-  };
-
-  const handlePasskeyLogin = async () => {
-    try {
-      await passkeyLogin('placeholder-challenge');
-    } catch (error) {
-      console.error('Passkey login failed:', error);
-    }
-  };
-
-  const isLoading = isEmailLoading || isGoogleLoading || isAppleLoading || isPasskeyLoading;
+  const isLoading = isEmailLoading || isGoogleLoading;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -123,34 +103,15 @@ export const LoginScreen: React.FC = () => {
               <Text style={styles.orLoginText}>or</Text>
               <Text style={styles.socialLoginText}>Log in with</Text>
               
-              <View style={styles.socialButtonsRow}>
-                <Pressable 
-                  style={styles.socialButton}
-                  onPress={handleGoogleLogin}
-                  disabled={isLoading}
-                >
-                  <View style={styles.socialButtonInner}>
-                    <GoogleLogo width={24} height={24} />
-                  </View>
-                </Pressable>
-
-                <Pressable 
-                  style={styles.socialButton}
-                  onPress={handleAppleLogin}
-                  disabled={isLoading}
-                >
-                  <View style={styles.socialButtonInner}>
-                    <AppleLogo width={24} height={24} />
-                  </View>
-                </Pressable>
-              </View>
-
               <Pressable 
-                style={styles.passkeyButton}
-                onPress={handlePasskeyLogin}
+                style={styles.googleButton}
+                onPress={handleGoogleLogin}
                 disabled={isLoading}
               >
-                <Text style={styles.passkeyButtonText}>Continue with passkey</Text>
+                <View style={styles.googleButtonInner}>
+                  <GoogleLogo width={24} height={24} />
+                  <Text style={styles.googleButtonText}>Continue with Google</Text>
+                </View>
               </Pressable>
             </View>
 
@@ -245,33 +206,25 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     fontWeight: 'bold',
   },
-  socialButtonsRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  socialButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+  googleButton: {
+    width: '100%',
     borderWidth: 1,
     borderColor: '#E5E7EB',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 10,
-  },
-  socialButtonInner: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  passkeyButton: {
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     marginTop: 16,
-    alignItems: 'center',
   },
-  passkeyButtonText: {
-    fontSize: 14,
-    color: '#1D4ED8',
-    fontWeight: '600',
-    textDecorationLine: 'underline',
+  googleButtonInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+  },
+  googleButtonText: {
+    fontSize: 16,
+    color: '#1F2937',
+    fontWeight: '500',
   },
   signupContainer: {
     flexDirection: 'row',

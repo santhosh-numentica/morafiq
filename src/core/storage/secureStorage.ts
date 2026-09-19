@@ -1,4 +1,4 @@
-import * as SecureStore from 'expo-secure-store/build/SecureStore';
+import * as Keychain from 'react-native-keychain';
 import { logger } from '@core/logging/logger';
 
 export class SecureStorageService {
@@ -15,7 +15,7 @@ export class SecureStorageService {
 
   public async setItem(key: string, value: string): Promise<boolean> {
     try {
-      await SecureStore.setItemAsync(key, value);
+      await Keychain.setGenericPassword(key, value, { service: key });
       return true;
     } catch (error) {
       logger.error('Secure storage set error', { key, error });
@@ -25,8 +25,11 @@ export class SecureStorageService {
 
   public async getItem(key: string): Promise<string | null> {
     try {
-      const result = await SecureStore.getItemAsync(key);
-      return result;
+      const result = await Keychain.getGenericPassword({ service: key });
+      if (result) {
+        return result.password;
+      }
+      return null;
     } catch (error) {
       logger.error('Secure storage get error', { key, error });
       return null;
@@ -35,7 +38,7 @@ export class SecureStorageService {
 
   public async removeItem(key: string): Promise<boolean> {
     try {
-      await SecureStore.deleteItemAsync(key);
+      await Keychain.resetGenericPassword({ service: key });
       return true;
     } catch (error) {
       logger.error('Secure storage remove error', { key, error });
@@ -45,9 +48,9 @@ export class SecureStorageService {
 
   public async clear(): Promise<void> {
     try {
-      // expo-secure-store doesn't have a clear all method, so we'd need to track keys
+      // react-native-keychain doesn't have a clear all method
       // For now, this is a no-op
-      logger.info('Secure storage clear called (no-op for expo-secure-store)');
+      logger.info('Secure storage clear called (no-op for keychain)');
     } catch (error) {
       logger.error('Secure storage clear error', { error });
     }

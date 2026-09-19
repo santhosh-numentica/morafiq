@@ -1,20 +1,4 @@
 {
   "name": "morafiq",
-  "slug": "morafiq",
-  "version": "1.0.0",
-  "orientation": "portrait",
-  "userInterfaceStyle": "light",
-  "assetBundlePatterns": [
-    "**/*"
-  ],
-  "ios": {
-    "supportsTablet": true,
-    "bundleIdentifier": "com.enterpriseapp"
-  },
-  "android": {
-    "package": "com.enterpriseapp"
-  },
-  "plugins": [
-    "expo-secure-store"
-  ]
+  "displayName": "Morafiq"
 }

@@ -74,6 +74,20 @@ npm run ios
 npm run android
 ```
 
+### Android Studio Setup
+If you are running the project on Android, ensure that:
+1. You have **JDK 17** installed. Set the `JAVA_HOME` environment variable to point to your JDK 17 installation.
+2. In your `android/build.gradle`, the `com.facebook.react` plugin is explicitly declared to avoid build issues with older packages (like `async-storage`). We have already added the following configuration to handle this:
+   ```gradle
+   plugins {
+       id("com.facebook.react") apply false
+   }
+   ```
+
+### Troubleshooting
+- **Plugin with id 'com.facebook.react' not found**: This is a known issue when installing certain dependencies (e.g., `@react-native-async-storage/async-storage`) alongside newer React Native (0.73+) versions. It is fixed by ensuring the `plugins { id("com.facebook.react") apply false }` block is present at the top of the root `android/build.gradle` file.
+- **Java Version Errors**: React Native typically requires JDK 17. Ensure `JAVA_HOME` points to the correct version, for example `$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.20.101-hotspot"`.
+
 ## 🔐 Authentication
 
 The app supports multiple authentication methods:

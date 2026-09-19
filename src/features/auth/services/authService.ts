@@ -25,8 +25,8 @@ export class AuthService {
     return this.authenticateWithCredential(credential, credentials);
   }
 
-  public async signInWithGoogle(idToken?: string, accessToken?: string): Promise<AuthResponse> {
-    const credential = await this.googleProvider.signIn({ idToken, accessToken });
+  public async signInWithGoogle(token?: string): Promise<AuthResponse> {
+    const credential = await this.googleProvider.signIn(token);
     return this.authenticateWithCredential(credential);
   }
 

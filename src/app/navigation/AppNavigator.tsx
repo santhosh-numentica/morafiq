@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppStackParamList } from './navigation.types';
+import { HomeScreen } from '@features/home';
 
 // Placeholder screens - these will be implemented in Phase 7
-const HomeScreen = () => null;
 const ProfileScreen = () => null;
 const SettingsScreen = () => null;
 const NotificationsScreen = () => null;

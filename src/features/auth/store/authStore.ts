@@ -9,7 +9,7 @@ interface AuthStore extends AuthState {
   setError: (error: string | undefined) => void;
   initialize: () => Promise<void>;
   loginWithEmail: (email: string, password: string) => Promise<void>;
-  loginWithGoogle: (idToken?: string, accessToken?: string) => Promise<void>;
+  loginWithGoogle: (token?: string) => Promise<void>;
   loginWithApple: (
     identityToken?: string,
     authorizationCode?: string,
@@ -91,10 +91,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  loginWithGoogle: async (idToken?: string, accessToken?: string) => {
+  loginWithGoogle: async (token?: string) => {
     try {
       set({ status: 'refreshing', error: undefined });
-      const response = await authService.signInWithGoogle(idToken, accessToken);
+      const response = await authService.signInWithGoogle(token);
       set({
         user: response.user,
         isAuthenticated: true,
