@@ -1,7 +1,7 @@
 import { LogLevel } from '@core/types';
 import { LogEntry, LogHandler } from './logTypes';
 import { sanitizeLogData } from './logSanitizer';
-import { config } from '@app/config/environment';
+import { config } from '@modules/config/environment';
 
 class Logger {
   private handlers: LogHandler[] = [];

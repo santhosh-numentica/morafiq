@@ -1,7 +1,7 @@
 import { IAuthProvider, PasskeyAuthProviderConfig, AuthCredential } from '@features/auth/types';
 import { AuthProviderType } from '@features/auth/types';
-import { config } from '@app/config/environment';
-import { featureFlags } from '@app/config/featureFlags';
+import { config } from '@modules/config/environment';
+import { featureFlags } from '@modules/config/featureFlags';
 
 export class PasskeyAuthProvider implements IAuthProvider {
   public async signIn(config?: PasskeyAuthProviderConfig): Promise<AuthCredential> {

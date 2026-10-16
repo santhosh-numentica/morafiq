@@ -1,7 +1,7 @@
 import { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { logger } from '@core/logging';
 import { sanitizeForLogging } from '@core/security';
-import { config } from '@app/config/environment';
+import { config } from '@modules/config/environment';
 
 declare module 'axios' {
   interface InternalAxiosRequestConfig {

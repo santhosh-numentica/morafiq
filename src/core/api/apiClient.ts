@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { config } from '@app/config/environment';
+import { config } from '@modules/config/environment';
 import { authInterceptor } from './interceptors/authInterceptor';
 import { errorInterceptor } from './interceptors/errorInterceptor';
 import { loggingInterceptor } from './interceptors/loggingInterceptor';

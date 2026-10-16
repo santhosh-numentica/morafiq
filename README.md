@@ -1,4 +1,4 @@
-# Enterprise React Native App
+# Morafiq React Native App
 
 A production-grade React Native application built with TypeScript, featuring a scalable feature-first architecture, multi-method authentication, and comprehensive error handling.
 

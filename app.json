@@ -1,4 +1,44 @@
 {
-  "name": "morafiq",
-  "displayName": "Morafiq"
+  "expo": {
+    "name": "morafiq",
+    "slug": "morafiq",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.morafiq.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.morafiq.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "entryPoint": "./index.js",
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "901f2aed-52be-4676-8249-b5a8b3818ade"
+      }
+    }
+  }
 }

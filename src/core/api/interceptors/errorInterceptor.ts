@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { mapAxiosErrorToAppError } from '@core/errors';
 import { logger } from '@core/logging/logger';
-import { config } from '@app/config/environment';
+import { config } from '@modules/config/environment';
 
 export const errorInterceptor = async (error: AxiosError): Promise<never> => {
   const appError = mapAxiosErrorToAppError(error);

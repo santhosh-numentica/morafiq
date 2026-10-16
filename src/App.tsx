@@ -1,9 +1,9 @@
 import React from 'react';
 import '../global.css';
 
-import { AppProviders } from './app/providers';
-import { RootNavigator } from './app/navigation';
-import { bootstrapApp } from './app/bootstrap';
+import { AppProviders } from './modules/providers';
+import { RootNavigator } from './modules/navigation';
+import { bootstrapApp } from './modules/bootstrap';
 
 const App: React.FC = () => {
   // Bootstrap the app on mount
